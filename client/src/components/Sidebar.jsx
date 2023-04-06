@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { logo, sun } from '../assets';
-import sabu from '../assets/arcai.png'
+
 import { navlinks } from '../constants';
 
 
