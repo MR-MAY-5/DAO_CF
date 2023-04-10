@@ -7,7 +7,7 @@ import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-  const { contract } = useContract('0x84320673dFfdff8C3CD69CC1F8524A7a7FB2D881');
+  const { contract } = useContract('0xf59A1f8251864e1c5a6bD64020e3569be27e6AA9');
   const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign');
   const { mutateAsync: donateToCampaign } = useContractWrite(contract, "donateToCampaign");
 
@@ -16,15 +16,14 @@ export const StateContextProvider = ({ children }) => {
 
   const publishCampaign = async (form) => {
     try {
-    const data = await createCampaign(
-    { args: [
-    address, // owner
-    form.title, // title
-    form.description, // description
-    form.target,
-    new Date(form.deadline).getTime(), // deadline,
-    form.image
-    ]})
+      const data = await createCampaign([
+        address, // owner
+        form.title, // title
+        form.description, // description
+        form.target,
+        new Date(form.deadline).getTime(), // deadline,
+        form.image
+      ])
 
       console.log("contract call success", data)
     } catch (error) {
