@@ -8,7 +8,7 @@ const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract('0x84320673dFfdff8C3CD69CC1F8524A7a7FB2D881');
-  const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign');
+  const { mutateAsync: createCampaign, isLoading} = useContractWrite(contract, 'createCampaign');
   const { mutateAsync: donateToCampaign } = useContractWrite(contract, "donateToCampaign");
  
 
