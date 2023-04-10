@@ -1,6 +1,6 @@
 import React, { useContext, createContext } from 'react';
 
-import { useAddress, useContract, useMetamask, useContractWrite } from '@thirdweb-dev/react';
+import { useAddress, useContract, useMetamask, useContractWrite, useContractRead } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
 import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
 
@@ -62,11 +62,7 @@ export const StateContextProvider = ({ children }) => {
   }
 
   const getDonations = async (pId) => {
-<<<<<<< HEAD
-    const  donations  = await contract.call("getDonators", [pId]);
-=======
-    const donations = await contract.call('getDonators', pId);
->>>>>>> parent of 0acf6f2 (Donation_updated)
+    const { donations } = useContractRead(contract, "getDonators", [pId])
     const numberOfDonations = donations[0].length;
 
     const parsedDonations = [];
