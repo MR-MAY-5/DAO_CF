@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+
+import { DisplayCampaigns } from '../components';
+import { useStateContext } from '../context'
 
 const Home = () => {
-<<<<<<< HEAD
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [campaigns, setCampaigns] = useState([]);
 
   const { address, contract, getCampaigns } = useStateContext();
@@ -25,11 +27,6 @@ const Home = () => {
       campaigns={campaigns}
     />
   )
-=======
-    return (
-        <div>Home</div>
-    )
->>>>>>> parent of e38a8a9 (final-commit)
 }
 
 export default Home
