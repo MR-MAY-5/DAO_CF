@@ -18,7 +18,7 @@ const CreateCampaign = () => {
     name: '',
     title: '',
     description: '',
-    target: '', 
+    target: '',
     deadline: '',
     image: ''
   });
@@ -30,9 +30,9 @@ const CreateCampaign = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     checkIfImage(form.image, async (exists) => {
-      if(exists) {
+      if (exists) {
         setIsLoading(true)
-        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
+        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18) })
         setIsLoading(false);
         navigate('/');
       } else {
@@ -51,14 +51,14 @@ const CreateCampaign = () => {
 
       <form onSubmit={handleSubmit} className="w-full mt-[65px] flex flex-col gap-[30px]">
         <div className="flex flex-wrap gap-[40px]">
-          <FormField 
+          <FormField
             labelName="Your Name *"
             placeholder="John Doe"
             inputType="text"
             value={form.name}
             handleChange={(e) => handleFormFieldChange('name', e)}
           />
-          <FormField 
+          <FormField
             labelName="Campaign Title *"
             placeholder="Write a title"
             inputType="text"
@@ -67,28 +67,28 @@ const CreateCampaign = () => {
           />
         </div>
 
-        <FormField 
-            labelName="Story *"
-            placeholder="Write your story"
-            isTextArea
-            value={form.description}
-            handleChange={(e) => handleFormFieldChange('description', e)}
-          />
+        <FormField
+          labelName="Story *"
+          placeholder="Write your story"
+          isTextArea
+          value={form.description}
+          handleChange={(e) => handleFormFieldChange('description', e)}
+        />
 
         <div className="w-full flex justify-start items-center p-4 bg-[#8c6dfd] h-[120px] rounded-[10px]">
-          <img src={money} alt="money" className="w-[40px] h-[40px] object-contain"/>
+          <img src={money} alt="money" className="w-[40px] h-[40px] object-contain" />
           <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px]">You will get 100% of the raised amount</h4>
         </div>
 
         <div className="flex flex-wrap gap-[40px]">
-          <FormField 
+          <FormField
             labelName="Goal *"
             placeholder="ETH 0.50"
             inputType="text"
             value={form.target}
             handleChange={(e) => handleFormFieldChange('target', e)}
           />
-          <FormField 
+          <FormField
             labelName="End Date *"
             placeholder="End Date"
             inputType="date"
@@ -97,24 +97,24 @@ const CreateCampaign = () => {
           />
         </div>
 
-        <FormField 
-            labelName="Campaign image *"
-            placeholder="Place image URL of your campaign"
-            inputType="url"
-            value={form.image}
-            handleChange={(e) => handleFormFieldChange('image', e)}
-          />
+        <FormField
+          labelName="Campaign image *"
+          placeholder="Place image URL of your campaign"
+          inputType="url"
+          value={form.image}
+          handleChange={(e) => handleFormFieldChange('image', e)}
+        />
 
-          <div className="flex justify-center items-center mt-[40px]">
-            <CustomButton 
-              btnType="submit"
-              title="Submit new campaign"
-              styles="bg-[#1dc071]"
-            />
-            {/* <Web3Button
+        <div className="flex justify-center items-center mt-[40px]">
+          <CustomButton
+            btnType="submit"
+            title="Submit new campaign"
+            styles="bg-[#1dc071]"
+          />
+          {/* <Web3Button
             contractAddress={contracAddrs}
           action={() => mutateAsync({args:[address,form.name,form.title,form.description,ethers.utils.parseUnits(form.target,18),form.deadline,form.image]})} /> */}
-          </div>
+        </div>
       </form>
     </div>
   )
