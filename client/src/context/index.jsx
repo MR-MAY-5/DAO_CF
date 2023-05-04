@@ -7,9 +7,9 @@ import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-  const { contract } = useContract('0x84320673dFfdff8C3CD69CC1F8524A7a7FB2D881');
+  const { contract } = useContract('0xD4ecB040B3a22314315c85d39594A9D03054dF6F');
   const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign');
-
+  const { mutateAsync: donateToCampaign} = useContractWrite(contract, "donateToCampaign")
   const address = useAddress();
   const connect = useMetamask();
 
@@ -31,7 +31,7 @@ export const StateContextProvider = ({ children }) => {
   }
 
   const getCampaigns = async () => {
-    const campaigns = await contract.call('getCampaigns');
+    const campaigns = useContractRead(contract, "getCampaigns")
 
     const parsedCampaings = campaigns.map((campaign, i) => ({
       owner: campaign.owner,
