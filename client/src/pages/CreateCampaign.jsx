@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { ethers } from 'ethers';
-
+// import { Web3Button, useContractWrite, useAddress } from '@thirdweb-dev/react';
 import { useStateContext } from '../context';
 import { money } from '../assets';
 import { CustomButton, FormField, Loader } from '../components';
@@ -9,6 +9,9 @@ import { checkIfImage } from '../utils';
 
 const CreateCampaign = () => {
   const navigate = useNavigate();
+  // const address = useAddress();
+  // const {contracAddrs} = '0xD4ecB040B3a22314315c85d39594A9D03054dF6F';
+  // const {mutateAsync} = useContractWrite(contracAddrs, 'createCampaign');
   const [isLoading, setIsLoading] = useState(false);
   const { createCampaign } = useStateContext();
   const [form, setForm] = useState({
@@ -26,7 +29,6 @@ const CreateCampaign = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     checkIfImage(form.image, async (exists) => {
       if(exists) {
         setIsLoading(true)
@@ -109,6 +111,9 @@ const CreateCampaign = () => {
               title="Submit new campaign"
               styles="bg-[#1dc071]"
             />
+            {/* <Web3Button
+            contractAddress={contracAddrs}
+          action={() => mutateAsync({args:[address,form.name,form.title,form.description,ethers.utils.parseUnits(form.target,18),form.deadline,form.image]})} /> */}
           </div>
       </form>
     </div>
