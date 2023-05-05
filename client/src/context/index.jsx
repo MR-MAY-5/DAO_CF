@@ -1,12 +1,9 @@
 import React, { useContext, createContext } from 'react';
-import { ThirdwebSDK } from "@thirdweb-dev/sdk";  //newly added
 import { useAddress, useContract, useMetamask, useContractWrite, useContractRead } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
 import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
 
 const StateContext = createContext();
-const sdk = new ThirdwebSDK("sepolia");  //newly added
-const { newContract } = await sdk.getContract("0xD4ecB040B3a22314315c85d39594A9D03054dF6F");  //newly added
 
 export const StateContextProvider = ({ children }) => {
 
@@ -18,7 +15,7 @@ export const StateContextProvider = ({ children }) => {
 
   const publishCampaign = async (form) => {
     try {
-      const data = await newContract.call('createCampaign',
+      const data = await createCampaign(
         [
           address, // owner
           form.title, // title
