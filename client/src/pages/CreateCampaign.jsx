@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { ethers }  from 'ethers';
+import { ethers } from 'ethers';
 // import { Web3Button, useContractWrite, useAddress } from '@thirdweb-dev/react';
 import { useStateContext } from '../context';
 import { money } from '../assets';
