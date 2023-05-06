@@ -17,20 +17,15 @@ const CampaignDetails = () => {
 
   const remainingDays = daysLeft(state.deadline);
 
-  // const fetchDonators = async () => {
-  //   const data = await getDonations(state.pId);
-  //   setDonators(data);
-  // }
+  const fetchDonators = async () => {
+    const data = await getDonations(state.pId);
+    setDonators(data);
+  }
 
   useEffect(() => {
-    (async () => {
-      if (contract) {
-        const data = await getDonations(state.pId);
-        setDonators(data);
-      };
-    })
+    if (contract) fetchDonators();
+    }, [contract, address])
 
-  }, [contract, address])
 
   const handleDonate = async () => {
     if (amount === '') {
