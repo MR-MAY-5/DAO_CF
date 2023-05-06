@@ -65,7 +65,7 @@ export const StateContextProvider = ({ children }) => {
   }
 
   const getDonations = async (pId) => {
-    const donations = useContractRead(contract, "getDonators", [pId]);
+    const donations = useContractRead(contract,"getDonators",[pId]);
     const numberOfDonations = donations[0].length;
     const parsedDonations = [];
     for(let i = 0; i < numberOfDonations; i++) {
@@ -74,7 +74,6 @@ export const StateContextProvider = ({ children }) => {
         donation: ethers.utils.formatEther(donations[1][i].toString())
       })
     }
-
     return parsedDonations;
   }
 
