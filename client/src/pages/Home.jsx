@@ -21,11 +21,14 @@ const Home = () => {
   }, [address, contract]);
 
   return (
-    <DisplayCampaigns 
+    <div>
+      <DisplayCampaigns 
       title="All Campaigns"
       isLoading={isLoading}
       campaigns={campaigns}
     />
+    </div>
+    
   )
 }
 
