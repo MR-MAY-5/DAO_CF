@@ -1,4 +1,5 @@
 import React from 'react';
+import CustomButton from './CustomButton';
 
 import { tagType, thirdweb } from '../assets';
 import { daysLeft } from '../utils';
@@ -38,6 +39,11 @@ const FundCard = ({ owner, title, description, target, deadline, amountCollected
           </div>
           <p className="flex-1 font-epilogue font-normal text-[12px] text-[#808191] truncate">by <span className="text-[#b2b3bd]">{owner}</span></p>
         </div>
+        <CustomButton
+                btnType="button"
+                title="Withdraw"
+                styles="w-full bg-[#8c6dfd]"
+              />
       </div>
     </div>
   )
