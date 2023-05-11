@@ -30,6 +30,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
           key={campaign.pId}
           {...campaign}
           handleClick={() => handleNavigate(campaign)}
+          page="Home"
         />)}
       </div>
     </div>

@@ -45,6 +45,7 @@ const Profile = () => {
     key={campaign.pId}
     {...campaign}
     handleClick={() => handleNavigate(campaign)}
+    page="Profile"
   />)}
   
 </div>
