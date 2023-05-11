@@ -24,7 +24,7 @@ const Profile = () => {
   }, [address, contract]);
 
   const handleNavigate = (campaign) => {
-    navigate(`/payment`, { state: campaign })
+    navigate(`/campaign-details/`, { state: campaign })
   }
 
   return (
