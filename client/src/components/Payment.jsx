@@ -34,11 +34,7 @@ const Payments = () => {
           <p className="font-epilogue fount-medium text-[20px] leading-[30px] text-center text-[#808191]">
            Amount Collected: {state.amountCollected}
           </p>
-
-
-        
-
-            <CustomButton
+          <CustomButton
               btnType="button"
               title="Withdraw Campaign"
               styles="w-full bg-[#8c6dfd]"
