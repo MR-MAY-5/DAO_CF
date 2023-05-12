@@ -54,8 +54,16 @@ export const StateContextProvider = ({ children }) => {
     const allCampaigns = await getCampaigns();
 
     const filteredCampaigns = allCampaigns.filter((campaign) => campaign.owner === address);
-
+    
     return filteredCampaigns;
+  }
+
+  const getTitleCampaigns = async(title) => {
+    const allCampaigns = await getCampaigns();
+
+    const filteredCampaigns = allCampaigns.filter((campaign) => campaign.title === title);
+
+    console.log(filteredCampaigns);
   }
 
   const donate = async (pId, amount) => {
@@ -88,6 +96,7 @@ export const StateContextProvider = ({ children }) => {
         createCampaign: publishCampaign,
         getCampaigns,
         getUserCampaigns,
+        getTitleCampaigns,
         donate,
         getDonations
       }}

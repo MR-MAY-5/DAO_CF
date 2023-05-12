@@ -4,20 +4,27 @@ import { useStateContext } from '../context';
 import { CustomButton } from './';
 import { log, menu, search, thirdweb } from '../assets';
 import { navlinks } from '../constants';
+import { ConnectWallet } from '@thirdweb-dev/react';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState('dashboard');
   const [toggleDrawer, setToggleDrawer] = useState(false);
-  const { connect, address } = useStateContext();
+  const [title, setTitle] = useState('');
+  const [titleCampaign, setTitleCampaign] = useState([]);
+  const { connect, address, getTitleCampaigns } = useStateContext();
+  // const adrs = address.substring(0,10) + "..."
 
+  const handleSearch = async () => {
+    await getTitleCampaigns(title);
+  } 
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
       <div className="lg:flex-1 flex flex-row max-w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
-        <input type="text" placeholder="Search for campaigns" className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none" />
+        <input type="text" placeholder="Search for campaigns" value={title} onChange={(e) => setTitle(e.target.value)} className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none" />
 
         <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer">
-          <img src={search} alt="search" className="w-[15px] h-[15px] object-contain" />
+          <img src={search} onClick={handleSearch} alt="search" className="w-[15px] h-[15px] object-contain" />
         </div>
       </div>
 
@@ -35,18 +42,17 @@ const Navbar = () => {
         {
           address ?
             <div className="flex md:flex-row flex-col-reverse justify-between gap-6">
-              <div className="lg:flex-1 flex flex-row w-[400px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
-                <input type="text" placeholder={address} className="flex w-full  placeholder:text-white  bg-transparent " disabled />
+              <div className="lg:flex-1 flex flex-row w-[170px] py-2 pl-4 pr-2 h-[52px]">
+                {/* <input type="text" placeholder={adrs} className="flex w-full  placeholder:text-white  bg-transparent " disabled /> */}
+                <ConnectWallet theme='dark' btnTitle='' />
               </div>
             </div>
             :
-            <div className="w-[52px] h-[52px] rounded-full bg-[#ffffff] flex justify-center items-center cursor-pointer">
-              <img src={thirdweb} alt="user" className="w-[60%] h-[60%] object-contain" />
-            </div>
-
+            // <div className="w-[52px] h-[52px] rounded-full bg-[#ffffff] flex justify-center items-center cursor-pointer">
+            //   <img src={thirdweb} alt="user" className="w-[60%] h-[60%] object-contain" />
+            // </div>
+            <div></div>
         }
-
-
       </div>
 
       {/* Small screen navigation */}

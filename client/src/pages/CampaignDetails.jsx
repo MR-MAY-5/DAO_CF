@@ -9,7 +9,7 @@ import { thirdweb } from '../assets';
 const CampaignDetails = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { donate, getDonations, contract, address } = useStateContext();
+  const { donate, getDonations, contract, address, connect } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState('');
@@ -28,16 +28,17 @@ const CampaignDetails = () => {
 
 
   const handleDonate = async () => {
-    if (amount === '') {
-      console.log(state.pId)
-      console.log(donators)
-      alert("Enter the ether value")
+    if (amount === '' || address === undefined) {
+      if (address === undefined) {
+        await connect();
+      }
+      else {
+        alert("Enter the ether value");
+      }
     }
     else {
       setIsLoading(true);
-
       await donate(state.pId, amount);
-
       navigate('/')
       setIsLoading(false);
     }
