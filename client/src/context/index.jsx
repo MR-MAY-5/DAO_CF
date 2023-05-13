@@ -1,4 +1,4 @@
-import React, { useContext, createContext } from 'react';
+import React, { useContext, createContext, useState } from 'react';
 
 import { useAddress, useContract, useMetamask, useContractWrite, useContractRead } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
@@ -14,7 +14,6 @@ export const StateContextProvider = ({ children }) => {
 
   const address = useAddress();
   const connect = useMetamask();
-
   const publishCampaign = async (form) => {
     try {
       const data = await createCampaign({args: [
@@ -62,15 +61,14 @@ export const StateContextProvider = ({ children }) => {
     const allCampaigns = await getCampaigns();
 
     const filteredCampaigns = allCampaigns.filter((campaign) => campaign.title === title);
-
-    console.log(filteredCampaigns);
+    
+    return filteredCampaigns;
   }
 
   const donate = async (pId, amount) => {
     const data = await contract.call('donateToCampaign', [pId], { value: ethers.utils.parseEther(amount)});
     console.log(data);
     return data;
-   
   }
 
   const getDonations = async (pId) => {

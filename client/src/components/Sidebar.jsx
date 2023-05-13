@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { log, sun } from "../assets";
+import { log, sun, moon } from "../assets";
+
 import { navlinks } from "../constants";
 
 const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
@@ -28,12 +29,10 @@ const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
 const Sidebar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("dashboard");
-  const [theme, setTheme] = useState(
-    localStorage.getItem('theme') || 'dark'
-  );
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
   useEffect(() => {
-    localStorage.setItem('theme', theme);
+    localStorage.setItem("theme", theme);
     document.body.className = theme;
   }, [theme]);
 
@@ -62,10 +61,15 @@ const Sidebar = () => {
               }}
             />
           ))}
-       
-        <button onClick={handleThemeSwitch}>
-          <Icon styles="bg-[#1c1c24] shadow-secondary" imgUrl={sun} />
-        </button> </div>
+
+          <button onClick={handleThemeSwitch}>
+            {theme === "dark" ? 
+              <Icon styles="bg-[#1c1c24] shadow-secondary" imgUrl={sun} />
+             : 
+              <Icon styles="bg-[#1c1c24] shadow-secondary" imgUrl={moon} />
+            }
+          </button>
+        </div>
       </div>
     </div>
   );
