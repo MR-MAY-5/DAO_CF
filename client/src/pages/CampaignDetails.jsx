@@ -5,6 +5,7 @@ import { useStateContext } from "../context";
 import { CountBox, CustomButton, Loader } from "../components";
 import { calculateBarPercentage, daysLeft } from "../utils";
 import { thirdweb } from "../assets";
+import Identicon from "react-identicons";
 
 const CampaignDetails = () => {
   const { state } = useLocation();
@@ -93,11 +94,11 @@ const CampaignDetails = () => {
               Creator
             </h4>
             <div className="mt-[20px] flex flex-row items-center flex-wrap gap-[14px]">
-              <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full bg-[#2c2f32] cursor-pointer">
-                <img
-                  src={thirdweb}
-                  alt="user"
-                  className="w-[60%] h-[60%] object-contain"
+              <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full  cursor-pointer">
+                <Identicon
+                  className="h-10 w-10 object-contain rounded-full shadow-md"
+                  string={state.owner}
+                  size={45}
                 />
               </div>
               <div>
