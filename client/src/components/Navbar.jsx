@@ -37,7 +37,7 @@ const Navbar = () => {
         <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer">
           <img
             src={search}
-            onClick={handleSearch}
+            onChange={handleSearch}
             alt="search"
             className="w-[15px] h-[15px] object-contain"
           />
@@ -57,7 +57,7 @@ const Navbar = () => {
 
         {address ? (
           <div className="flex md:flex-row flex-col-reverse justify-between gap-6">
-            <div className="lg:flex-1 flex flex-row w-[170px] py-2 pl-4 pr-2 h-[52px]">
+            <div className="lg:flex-1 flex flex-row w-[170px] py-2 pl-4 pr-2 h-[72px] ">
               {/* <input type="text" placeholder={adrs} className="flex w-full  placeholder:text-white  bg-transparent " disabled /> */}
               <ConnectWallet theme="dark" btnTitle="" />
             </div>
