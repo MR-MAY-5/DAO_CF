@@ -5,7 +5,8 @@ import { useStateContext } from "../context";
 import { CountBox, CustomButton, Loader } from "../components";
 import { calculateBarPercentage, daysLeft } from "../utils";
 import { thirdweb } from "../assets";
-import Identicon from "react-identicons";
+import Identicon from 'react-identicons';
+import { Alert, Space } from "antd"
 
 const CampaignDetails = () => {
   const { state } = useLocation();
@@ -16,6 +17,9 @@ const CampaignDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState("");
   const [donators, setDonators] = useState([]);
+  const [metamaskError, setMetamaskError] = useState(false);
+  const [valueError, setValueError] = useState(false);
+  const [expiredError, setExpiredError] = useState(false);
 
   const remainingDays = daysLeft(state.deadline);
 
@@ -28,16 +32,36 @@ const CampaignDetails = () => {
     if (contract) fetchDonators();
   }, [contract, address]);
 
+  const connectWallet = async () => {
+    if(window.ethereum) {
+      window.ethereum.request({
+        method: "eth_requestAccounts"
+      }).then(res=>{
+        setMetamaskError(false);
+      })
+    } else {
+      alert("install metamask")
+    }
+  }
   const handleDonate = async () => {
     if (amount === "" || address === undefined || remainingDays === "Expired") {
       if (address === undefined || remainingDays === "Expired") {
         if (address === undefined) {
-          await connect();
+          // await connect();
+          await connectWallet()
+          setValueError(false);
+          setExpiredError(false);
+          setMetamaskError(true);
+          
         } else {
-          alert("The Campaign was expired");
+          setMetamaskError(false);
+          setValueError(false);
+          setExpiredError(true);
         }
       } else {
-        alert("Enter the ether value");
+        setExpiredError(false);
+        setMetamaskError(false);
+        setValueError(true);
       }
     } else {
       try {
@@ -50,13 +74,14 @@ const CampaignDetails = () => {
       }
     }
   };
-  
+
   return (
     <div>
       {isLoading && <Loader />}
 
       <div className="w-full grid md:flex-row flex-col mt-10 gap-[30px]">
         <div className="flex-1 flex-col">
+
           <img
             src={state.image}
             alt="campaign"
@@ -181,11 +206,43 @@ const CampaignDetails = () => {
                   you.
                 </p>
               </div>
-
+              {
+                metamaskError === true ?
+                  <div>
+                    <Space
+                      direction="vertical"
+                      className="w-[100%] " >
+                      <Alert message="Click the above connect button to connect metamask" type="error" showIcon closable onClick={(e) => setMetamaskError(false)}/>
+                    </Space>
+                  </div> :
+                  <div></div>
+              }
+              {
+                valueError === true ?
+                  <div>
+                    <Space
+                      direction="vertical"
+                      className="w-[100%] " >
+                      <Alert message="Enter a minimum of 0.1ETH to donate" type="error" showIcon closable onClick={(e) => setValueError(false)}/>
+                    </Space>
+                  </div> :
+                  <div></div>
+              }
+              {
+                expiredError === true ?
+                  <div>
+                    <Space
+                      direction="vertical"
+                      className="w-[100%] " >
+                      <Alert message="The Campaign was expired" type="error" showIcon closable onClick={(e) => setExpiredError(false)}/>
+                    </Space>
+                  </div> :
+                  <div></div>
+              }
               <CustomButton
                 btnType="button"
                 title="Fund Campaign"
-                styles="w-full bg-[#8c6dfd]"
+                styles="w-full bg-[#8c6dfd] mt-3"
                 handleClick={handleDonate}
               />
             </div>

@@ -12,6 +12,7 @@
     "@thirdweb-dev/chains": "^0.1.13",
     "@thirdweb-dev/react": "^3.11.1",
     "@thirdweb-dev/sdk": "^3.10.5",
+    "antd": "^5.5.0",
     "ethers": "^5.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
