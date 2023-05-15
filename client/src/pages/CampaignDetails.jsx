@@ -50,7 +50,7 @@ const CampaignDetails = () => {
       }
     }
   };
-
+  
   return (
     <div>
       {isLoading && <Loader />}

@@ -19,8 +19,10 @@ const Navbar = () => {
       alert("Enter Title name to search");
     } else {
       const data = await getTitleCampaigns(title);
-      data.map((campaign) => navigate(`/campaign-details/`, { state: campaign }))
-      setTitle('');
+      data.map((campaign) =>
+        navigate(`/campaign-details/`, { state: campaign })
+      );
+      setTitle("");
     }
   };
   return (
@@ -33,15 +35,15 @@ const Navbar = () => {
           onChange={(e) => setTitle(e.target.value)}
           className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none"
         />
-
-        <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer">
-          <img
-            src={search}
-            onChange={handleSearch}
-            alt="search"
-            className="w-[15px] h-[15px] object-contain"
-          />
-        </div>
+        <button onClick={handleSearch}>
+          <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer">
+            <img
+              src={search}
+              alt="search"
+              className="w-[15px] h-[15px] object-contain"
+            />
+          </div>{" "}
+        </button>
       </div>
 
       <div className="sm:flex hidden flex-row justify-end gap-4">
@@ -57,7 +59,7 @@ const Navbar = () => {
 
         {address ? (
           <div className="flex md:flex-row flex-col-reverse justify-between gap-6">
-            <div className="lg:flex-1 flex flex-row w-[170px] py-2 pl-4 pr-2 h-[72px] ">
+            <div className="lg:flex-1 flex flex-row w-[170px] py-2 pl-4 pr-2 h-[58px] ">
               {/* <input type="text" placeholder={adrs} className="flex w-full  placeholder:text-white  bg-transparent " disabled /> */}
               <ConnectWallet theme="dark" btnTitle="" />
             </div>
