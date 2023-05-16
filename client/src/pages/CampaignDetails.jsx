@@ -32,27 +32,26 @@ const CampaignDetails = () => {
     if (contract) fetchDonators();
   }, [contract, address]);
 
-  const connectWallet = async () => {
-    if(window.ethereum) {
-      window.ethereum.request({
-        method: "eth_requestAccounts"
-      }).then(res=>{
-        setMetamaskError(false);
-      })
-    } else {
-      alert("install metamask")
-    }
-  }
+  // const connectWallet = async () => {
+  //   if(window.ethereum) {
+  //     window.ethereum.request({
+  //       method: "eth_requestAccounts"
+  //     }).then(()=>{
+  //       setMetamaskError(false);
+  //       alert(address)
+  //     })
+  //   } else {
+  //     alert("install metamask")
+  //   }
+  // }
   const handleDonate = async () => {
     if (amount === "" || address === undefined || remainingDays === "Expired") {
       if (address === undefined || remainingDays === "Expired") {
         if (address === undefined) {
           // await connect();
-          await connectWallet()
           setValueError(false);
           setExpiredError(false);
-          setMetamaskError(true);
-          
+          setMetamaskError(true); 
         } else {
           setMetamaskError(false);
           setValueError(false);

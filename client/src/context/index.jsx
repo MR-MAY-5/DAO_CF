@@ -28,6 +28,8 @@ export const StateContextProvider = ({ children }) => {
 
   const address = useAddress();
   const connect = useMetamask();
+  const [fetchedData, setFetchedData] = useState([])
+  
   const publishCampaign = async (form) => {
     try {
       const data = await createCampaign({
@@ -79,10 +81,14 @@ export const StateContextProvider = ({ children }) => {
   const getTitleCampaigns = async (title) => {
     const allCampaigns = await getCampaigns();
 
-    const filteredCampaigns = await allCampaigns.filter((campaign) => campaign.title === title);
-
-    return filteredCampaigns
+    const filteredCampaigns = await allCampaigns.filter((campaign) => campaign.title.toLowerCase().includes(title));
+    
+    setFetchedData(filteredCampaigns)
   };
+  
+  const filteredData = async() => {
+    return fetchedData;
+  }
 
   const donate = async (pId, amount) => {
     const data = await contract.call("donateToCampaign", [pId], {
@@ -115,6 +121,7 @@ export const StateContextProvider = ({ children }) => {
         getCampaigns,
         getUserCampaigns,
         getTitleCampaigns,
+        filteredData,
         donate,
         getDonations,
       }}

@@ -9,7 +9,7 @@ import { checkIfImage } from '../utils';
 const CreateCampaign = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const { createCampaign } = useStateContext();
+  const { createCampaign, getTitleCampaigns } = useStateContext();
   const [form, setForm] = useState({
     name: '',
     title: '',
@@ -27,10 +27,16 @@ const CreateCampaign = () => {
     e.preventDefault();
     checkIfImage(form.image, async (exists) => {
       if (exists) {
-        setIsLoading(true)
-        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18) })
-        setIsLoading(false);
-        navigate('/');
+        const data = await getTitleCampaigns(form.title);
+        if(data.length <= 0 ) {
+          setIsLoading(true)
+          await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18) })
+          setIsLoading(false);
+          navigate('/');
+        } else {
+          alert("The title was already taken")
+        }
+        
       } else {
         alert('Provide valid image URL')
         setForm({ ...form, image: '' });
