@@ -81,7 +81,7 @@ const CampaignDetails = () => {
       <div className="max-w-[1640px] mx-auto mt-10 gap-[30px]">
         <div className="relative">
           <img
-            className="w-full object-cover rounded-xl"
+            className="w-full h-[520px] object-cover rounded-xl"
             src={state.image}
             alt="campaign"
           />
@@ -99,7 +99,7 @@ const CampaignDetails = () => {
           </div>
         </div>
 
-        <div className="flex w-full justify-between gap-[20px]">
+        <div className="grid  gap-[20px]">
           <CountBox title="Days Left" value={remainingDays} />
           <CountBox title="Total Backers" value={donators.length} />
         </div>

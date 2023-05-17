@@ -81,14 +81,14 @@ export const StateContextProvider = ({ children }) => {
   const getTitleCampaigns = async (title) => {
     const allCampaigns = await getCampaigns();
 
-    const filteredCampaigns = await allCampaigns.filter((campaign) => campaign.title.toLowerCase().includes(title));
+    const filteredCampaigns = await allCampaigns.filter((campaign) => campaign.title.toLowerCase().includes(title) || campaign.title.includes(title));
     
     setFetchedData(filteredCampaigns)
   };
   
   const filteredData = async() => {
     return fetchedData;
-  }
+  };
 
   const donate = async (pId, amount) => {
     const data = await contract.call("donateToCampaign", [pId], {
