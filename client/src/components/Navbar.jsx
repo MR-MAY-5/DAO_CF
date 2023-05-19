@@ -5,6 +5,7 @@ import { CustomButton } from "./";
 import { log, menu, search, thirdweb } from "../assets";
 import { navlinks } from "../constants";
 import { ConnectWallet } from "@thirdweb-dev/react";
+import { daysLeft } from "../utils";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -14,25 +15,31 @@ const Navbar = () => {
   const { connect, address, getTitleCampaigns } = useStateContext();
   // const adrs = address.substring(0,10) + "..."
 
-  useEffect(() => {
-    fetchCampaigns();
-  })
+  // useEffect(() => {
+  //    fetchCampaigns();
+  // })
 
-  const fetchCampaigns = async () => {
-    await getTitleCampaigns(title);
-  }
+  // const fetchCampaigns = async () => {
+  //   await getTitleCampaigns(title);
+  // }
   const handleSearch = async () => {
     if (title === "") {
       alert("Enter Title name to search");
     } else {
-      const data = await getTitleCampaigns(title);
-      data.map((campaign) =>
-        navigate(`/campaign-details/`, { state: campaign })
-      );
-      setTitle("");
+      const data = await getTitleCampaigns(title)
+      data.map((campaign) => {
+        const days = daysLeft(campaign.deadline)
+        if (days === "Expired") {
+          alert("Expired campaigns")
+        } else {
+          navigate(`/campaign-details/`, { state: campaign });
+          setTitle("");
+        }
+      }
+      )
     }
   };
-  
+
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
       <div className="lg:flex-1 flex flex-row max-w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
@@ -50,7 +57,7 @@ const Navbar = () => {
               alt="search"
               className="w-[15px] h-[15px] object-contain"
             />
-          </div>{" "}
+          </div>
         </button>
       </div>
 
@@ -98,17 +105,15 @@ const Navbar = () => {
         />
 
         <div
-          className={`absolute top-[60px] right-0 left-0 bg-[#1c1c24] z-10 shadow-secondary py-4 ${
-            !toggleDrawer ? "-translate-y-[100vh]" : "translate-y-0"
-          } transition-all duration-700`}
+          className={`absolute top-[60px] right-0 left-0 bg-[#1c1c24] z-10 shadow-secondary py-4 ${!toggleDrawer ? "-translate-y-[100vh]" : "translate-y-0"
+            } transition-all duration-700`}
         >
           <ul className="mb-4">
             {navlinks.map((link) => (
               <li
                 key={link.name}
-                className={`flex p-4 ${
-                  isActive === link.name && "bg-[#3a3a43]"
-                }`}
+                className={`flex p-4 ${isActive === link.name && "bg-[#3a3a43]"
+                  }`}
                 onClick={() => {
                   setIsActive(link.name);
                   setToggleDrawer(false);
@@ -118,14 +123,12 @@ const Navbar = () => {
                 <img
                   src={link.imgUrl}
                   alt={link.name}
-                  className={`w-[24px] h-[24px] object-contain ${
-                    isActive === link.name ? "grayscale-0" : "grayscale"
-                  }`}
+                  className={`w-[24px] h-[24px] object-contain ${isActive === link.name ? "grayscale-0" : "grayscale"
+                    }`}
                 />
                 <p
-                  className={`ml-[20px] font-epilogue font-semibold text-[14px] ${
-                    isActive === link.name ? "text-[#1dc071]" : "text-[#808191]"
-                  }`}
+                  className={`ml-[20px] font-epilogue font-semibold text-[14px] ${isActive === link.name ? "text-[#1dc071]" : "text-[#808191]"
+                    }`}
                 >
                   {link.name}
                 </p>

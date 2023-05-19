@@ -83,7 +83,9 @@ export const StateContextProvider = ({ children }) => {
 
     const filteredCampaigns = await allCampaigns.filter((campaign) => campaign.title.toLowerCase().includes(title) || campaign.title.includes(title));
     
-    setFetchedData(filteredCampaigns)
+    setFetchedData(filteredCampaigns);
+    
+    return filteredCampaigns;
   };
   
   const filteredData = async() => {

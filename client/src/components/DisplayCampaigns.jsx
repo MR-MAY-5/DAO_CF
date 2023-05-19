@@ -7,20 +7,25 @@ import { daysLeft } from "../utils";
 
 const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
   const navigate = useNavigate();
-  const remainingDays = campaigns.map((campaign) =>
-    daysLeft(campaign.deadline)
-  );
-  const { filteredData } = useStateContext();
-  const [filteredCampaigns, setFilteredCampaigns] = useState([]);
-  useEffect(() => {
-    fetchedData();
-  });
-  const fetchedData = async () => {
-    const data = await filteredData();
-    setFilteredCampaigns(data);
-  };
+  // const remainingDays = campaigns.map((campaign) =>
+  //   daysLeft(campaign.deadline)
+  // );
+  // const { filteredData } = useStateContext();
+  // const [filteredCampaigns, setFilteredCampaigns] = useState([]);
+  // useEffect(() => {
+  //   fetchedData();
+  // });
+  // const fetchedData = async () => {
+  //   const data = await filteredData();
+  //   setFilteredCampaigns(data);
+  // };
   const handleNavigate = (campaign) => {
-    navigate(`/campaign-details/`, { state: campaign });
+    const days = daysLeft(campaign.deadline)
+    if (days === "Expired") {
+      return;
+    } else {
+      navigate(`/campaign-details/`, { state: campaign });
+    }
   };
 
   return (
@@ -43,26 +48,35 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
             You have not created any campigns yet
           </p>
         )}
-        {!isLoading && filteredCampaigns.length === 0 && (
+        {!isLoading && campaigns.length === 0 && (
           <p className="font-epilogue font-semibold text-[14px] leading-[30px] text-[#818183]">
             No results found
           </p>
         )}
 
         {!isLoading &&
-          filteredCampaigns.length > 0 &&
-          filteredCampaigns.map((campaign) => (
-            <div>
-              {remainingDays[campaign.pId] != "Expired" ? (
-                <FundCard
-                  key={campaign.pId}
-                  {...campaign}
-                  handleClick={() => handleNavigate(campaign)}
-                />
-              ) : (
-                <div />
-              )}
-            </div>
+          campaigns.length > 0 &&
+          campaigns.map((campaign) => (
+            // <div key={campaign.pId}>
+            //   {remainingDays[campaign.pId] != "Expired" ? (
+            //     <FundCard
+            //       key={campaign.pId}
+            //       {...campaign}
+            //       handleClick={() => handleNavigate(campaign)}
+            //     />
+            //   ) : (
+            //     <FundCard
+            //       key={campaign.pId}
+            //       {...campaign}
+            //       handleClick={() => handleNavigate(campaign)}
+            //     />
+            //   )}
+            // </div>
+            <FundCard
+              key={campaign.pId}
+              {...campaign}
+              handleClick={() => handleNavigate(campaign)}
+            />
           ))}
       </div>
     </div>

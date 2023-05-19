@@ -12,7 +12,8 @@ import menu from './menu.svg';
 import money from './money.svg';
 import loader from './loader.svg';
 import thirdweb from './thirdweb.png';
-import moon from './moon.png'
+import moon from './moon.png';
+import expired from './expired.png'
 export {
   tagType,
   createCampaign,
@@ -29,4 +30,5 @@ export {
   loader,
   thirdweb,
   moon,
+  expired,
 };
