@@ -13,6 +13,7 @@ const FundCard = ({
   amountCollected,
   image,
   handleClick,
+  page,
 }) => {
   const remainingDays = daysLeft(deadline);
 
@@ -22,7 +23,7 @@ const FundCard = ({
       onClick={handleClick}
     >
       {
-        remainingDays != "Expired" ?
+        page === "Profile"  || remainingDays != "Expired"?
           <img
             src={image}
             alt="fund"

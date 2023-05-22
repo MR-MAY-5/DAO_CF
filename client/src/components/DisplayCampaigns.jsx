@@ -31,7 +31,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
   return (
     <div>
       <h1 className="font-epilogue font-semibold text-[18px] text-black dark:text-white text-left">
-        {title}
+        {title} ({campaigns.length})
       </h1>
 
       <div className="flex flex-wrap mt-[20px] gap-[26px]">
@@ -76,6 +76,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
               key={campaign.pId}
               {...campaign}
               handleClick={() => handleNavigate(campaign)}
+              page="Home"
             />
           ))}
       </div>

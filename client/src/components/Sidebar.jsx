@@ -62,13 +62,13 @@ const Sidebar = () => {
             />
           ))}
 
-          <button onClick={handleThemeSwitch}>
+          {/* <button onClick={handleThemeSwitch}>
             {theme === "dark" ? 
               <Icon styles="bg-[#1c1c24] shadow-secondary" imgUrl={sun} />
              : 
               <Icon styles="bg-[#1c1c24] shadow-secondary" imgUrl={moon} />
             }
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

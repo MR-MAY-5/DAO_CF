@@ -48,7 +48,6 @@ const CampaignDetails = () => {
     if (amount === "" || address === undefined || remainingDays === "Expired") {
       if (address === undefined || remainingDays === "Expired") {
         if (address === undefined) {
-          // await connect();
           setValueError(false);
           setExpiredError(false);
           setMetamaskError(true);
@@ -81,7 +80,7 @@ const CampaignDetails = () => {
       <div className="max-w-[1640px] mx-auto mt-10 gap-[30px]">
         <div className="relative">
           <img
-            className="w-full h-[520px] object-cover rounded-xl"
+            className="w-full h-[520px] object-fill rounded-xl"
             src={state.image}
             alt="campaign"
           />
@@ -223,7 +222,7 @@ const CampaignDetails = () => {
                 <div>
                   <Space direction="vertical" className="w-[100%] ">
                     <Alert
-                      message="Enter a minimum of 0.1ETH to donate"
+                      message="Enter a value to donate"
                       type="error"
                       showIcon
                       closable
